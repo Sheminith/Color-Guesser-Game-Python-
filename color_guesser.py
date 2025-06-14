@@ -1,6 +1,6 @@
 import random
 
-COLORS = ["R", "G", "B", "Y", "O", "P"]
+COLORS = ["R", "G", "B", "Y"]
 TRIES = 10
 CODE_LENGTH = 4
 
@@ -56,3 +56,25 @@ def check_code(guess, real_code):
             color_counts[guess_color] -= 1
 
     return correct_pos, incorrect_pos
+
+def game():
+    print(f"Welcome come to color guesser! You have {TRIES} tries to guess the code...")
+    print("Valid colors to guess: ", *COLORS)
+
+    code = generate_code()
+    
+    for attempts in range(1, TRIES + 1):
+        guess = guess_code()
+        correct_pos, incorrect_pos = check_code(guess, code)
+
+        if correct_pos == CODE_LENGTH:
+            print(f"You successfully guessed the code in {attempts} tries!")
+            break
+
+        print(f"Correct positions: {correct_pos} | Incorrect positions: {incorrect_pos}")
+
+    else:
+        print("You ran out of tries. The code was: ", *code)
+
+if __name__ == '__main__':
+    game()
